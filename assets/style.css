@@ -1,0 +1,302 @@
+/* ============================================================
+   THE LEDGER — a small archive site
+   Design tokens
+   ============================================================ */
+:root{
+  --ink-900:#14181a;
+  --ink-800:#1c2224;
+  --ink-700:#262d2f;
+  --paper:#efe7d4;
+  --paper-dim:#e3d9c0;
+  --text-light:#ece7d8;
+  --text-dim:#9aa39d;
+  --text-dark:#23241f;
+  --rust:#c1622d;
+  --sage:#7c9885;
+
+  --font-display:'Fraunces', Georgia, serif;
+  --font-body:'Inter', -apple-system, sans-serif;
+  --font-mono:'IBM Plex Mono', monospace;
+
+  --radius:2px;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--ink-900);
+  color:var(--text-light);
+  font-family:var(--font-body);
+  line-height:1.5;
+}
+
+::selection{background:var(--rust);color:var(--text-light);}
+
+a{color:inherit;}
+
+/* ---------- layout shell ---------- */
+.wrap{
+  max-width:960px;
+  margin:0 auto;
+  padding:0 24px;
+}
+
+header.site-head{
+  border-bottom:1px solid var(--ink-700);
+  padding:48px 0 32px;
+}
+.site-head .eyebrow{
+  font-family:var(--font-mono);
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--sage);
+  display:block;
+  margin-bottom:10px;
+}
+.site-head h1{
+  font-family:var(--font-display);
+  font-size:clamp(36px,6vw,58px);
+  font-weight:600;
+  margin:0 0 10px;
+  letter-spacing:-0.01em;
+}
+.site-head p{
+  color:var(--text-dim);
+  max-width:46ch;
+  margin:0;
+  font-size:15px;
+}
+.site-head .top-nav{
+  margin-top:24px;
+  font-family:var(--font-mono);
+  font-size:12px;
+}
+.site-head .top-nav a{
+  text-decoration:none;
+  color:var(--text-dim);
+  border-bottom:1px solid transparent;
+}
+.site-head .top-nav a:hover{color:var(--paper);border-color:var(--rust);}
+
+/* ---------- controls row ---------- */
+.controls{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  align-items:center;
+  margin:32px 0 28px;
+}
+.controls input[type=search],
+.controls select{
+  background:var(--ink-800);
+  border:1px solid var(--ink-700);
+  color:var(--text-light);
+  font-family:var(--font-body);
+  font-size:14px;
+  padding:10px 12px;
+  border-radius:var(--radius);
+}
+.controls input[type=search]{flex:1;min-width:180px;}
+.controls .count{
+  font-family:var(--font-mono);
+  font-size:12px;
+  color:var(--text-dim);
+  margin-left:auto;
+}
+
+/* ---------- ledger card (signature element) ---------- */
+.ledger{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  padding-bottom:80px;
+}
+.card{
+  position:relative;
+  background:var(--paper);
+  color:var(--text-dark);
+  border-radius:var(--radius);
+  display:grid;
+  grid-template-columns:88px 1fr auto;
+  gap:20px;
+  align-items:start;
+  padding:20px 22px;
+  overflow:hidden;
+  animation:rise .4s ease both;
+}
+.card::before{ /* perforated edge */
+  content:"";
+  position:absolute;
+  left:88px;
+  top:0;
+  bottom:0;
+  width:0;
+  border-left:2px dashed rgba(35,36,31,.18);
+}
+.card .idx{
+  font-family:var(--font-mono);
+  font-size:12px;
+  color:var(--rust);
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  letter-spacing:.08em;
+  align-self:stretch;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.card .body h3{
+  font-family:var(--font-display);
+  font-size:21px;
+  margin:0 0 6px;
+  font-weight:600;
+}
+.card .body p{
+  margin:0 0 10px;
+  font-size:14px;
+  color:#4a473c;
+}
+.card .meta{
+  font-family:var(--font-mono);
+  font-size:11px;
+  color:#7a725c;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.card .tag{
+  display:inline-block;
+  background:var(--sage);
+  color:#12201a;
+  font-family:var(--font-mono);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  padding:3px 7px;
+  border-radius:2px;
+}
+.card .file{
+  align-self:center;
+  text-align:right;
+  font-family:var(--font-mono);
+  font-size:12px;
+}
+.card .file a{
+  display:inline-block;
+  text-decoration:none;
+  color:var(--ink-900);
+  border:1px solid var(--ink-900);
+  padding:8px 12px;
+  border-radius:var(--radius);
+}
+.card .file a:hover{background:var(--ink-900);color:var(--paper);}
+
+@keyframes rise{
+  from{opacity:0;transform:translateY(6px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* ---------- empty / loading states ---------- */
+.state-msg{
+  font-family:var(--font-mono);
+  font-size:13px;
+  color:var(--text-dim);
+  padding:40px 0;
+  text-align:center;
+  border:1px dashed var(--ink-700);
+  border-radius:var(--radius);
+}
+
+/* ---------- admin form ---------- */
+.panel{
+  background:var(--ink-800);
+  border:1px solid var(--ink-700);
+  border-radius:var(--radius);
+  padding:24px;
+  margin-bottom:28px;
+}
+.panel h2{
+  font-family:var(--font-display);
+  font-size:20px;
+  margin:0 0 16px;
+}
+label{
+  display:block;
+  font-family:var(--font-mono);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  color:var(--text-dim);
+  margin:14px 0 6px;
+}
+input[type=text],
+input[type=email],
+input[type=password],
+input[type=file],
+textarea{
+  width:100%;
+  background:var(--ink-900);
+  border:1px solid var(--ink-700);
+  color:var(--text-light);
+  padding:10px 12px;
+  font-family:var(--font-body);
+  font-size:14px;
+  border-radius:var(--radius);
+}
+textarea{min-height:80px;resize:vertical;}
+button{
+  font-family:var(--font-mono);
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  background:var(--rust);
+  color:var(--text-light);
+  border:none;
+  padding:11px 18px;
+  border-radius:var(--radius);
+  cursor:pointer;
+  margin-top:18px;
+}
+button:hover{filter:brightness(1.1);}
+button.ghost{
+  background:transparent;
+  border:1px solid var(--ink-700);
+  color:var(--text-dim);
+}
+button.danger{background:#8a2f21;}
+
+.row{display:flex;gap:12px;flex-wrap:wrap;}
+.row > *{flex:1;min-width:160px;}
+
+.admin-list .card{margin-bottom:10px;}
+.admin-list .card .file{display:flex;gap:8px;}
+.admin-list .card button{margin-top:0;padding:8px 10px;font-size:11px;}
+
+.msg{
+  font-family:var(--font-mono);
+  font-size:12px;
+  padding:10px 12px;
+  border-radius:var(--radius);
+  margin-top:14px;
+}
+.msg.ok{background:rgba(124,152,133,.15);color:var(--sage);border:1px solid var(--sage);}
+.msg.err{background:rgba(193,98,45,.15);color:var(--rust);border:1px solid var(--rust);}
+
+.hidden{display:none !important;}
+
+footer.site-foot{
+  border-top:1px solid var(--ink-700);
+  padding:24px 0 48px;
+  font-family:var(--font-mono);
+  font-size:11px;
+  color:var(--text-dim);
+}
+
+@media (max-width:600px){
+  .card{grid-template-columns:1fr;}
+  .card .idx{writing-mode:horizontal-tb;transform:none;justify-content:flex-start;}
+  .card::before{display:none;}
+  .card .file{text-align:left;}
+}
