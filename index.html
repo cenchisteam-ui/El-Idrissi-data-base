@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ledger — Archive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="wrap">
+  <header class="site-head">
+    <span class="eyebrow">Public archive</span>
+    <h1>The Ledger</h1>
+    <p>A running index of records and files, kept in order and open to browse.</p>
+    <nav class="top-nav"><a href="admin.html">Admin login →</a></nav>
+  </header>
+
+  <div class="controls">
+    <input type="search" id="search" placeholder="Search entries…">
+    <select id="category"><option value="">All categories</option></select>
+    <span class="count" id="count"></span>
+  </div>
+
+  <section class="ledger" id="ledger">
+    <div class="state-msg">Loading entries…</div>
+  </section>
+
+  <footer class="site-foot">The Ledger — built on a static site + Supabase.</footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/config.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
